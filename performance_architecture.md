@@ -5,7 +5,25 @@ To instrument the entire request lifecycle within OpenClaw to capture granular p
 
 ## 🏗️ Overall Architecture Diagram (Conceptual)
 
-`[User Request] $\to$ [Agent/LLM Core] $\to$ [Instrumentation Layer (Timer)] $\to$ [Tool Execution] $\to$ [Data Capture] $\to$ [Performance Log (JSONL)] $\to$ [Dashboard Viewer (Jekyll/Hugo)] $\to$ [User Dashboard]`
+```mermaid
+graph LR
+    UserRequest["User Request"]
+    AgentLLM["Agent/LLM Core"]
+    Instrumentation["Instrumentation Layer (Timer)"]
+    ToolExecution["Tool Execution"]
+    DataCapture["Data Capture"]
+    PerformanceLog["Performance Log (JSONL)"]
+    DashboardViewer["Dashboard Viewer (Jekyll/Hugo)"]
+    UserDashboard["User Dashboard"]
+    
+    UserRequest --> AgentLLM
+    AgentLLM --> Instrumentation
+    Instrumentation --> ToolExecution
+    ToolExecution --> DataCapture
+    DataCapture --> PerformanceLog
+    PerformanceLog --> DashboardViewer
+    DashboardViewer --> UserDashboard
+```
 
 ## 🧱 Layer Breakdown
 
